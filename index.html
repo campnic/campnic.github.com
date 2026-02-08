@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nicholas Campion — CTO & AI Transformation Architect</title>
+  <meta name="description" content="Nicholas Campion is a CTO and AI Transformation Architect bridging executive vision and hands-on engineering.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>N</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0a0a0b;
+      --bg-secondary: #111113;
+      --bg-card: #16161a;
+      --border: #222228;
+      --text-primary: #ededef;
+      --text-secondary: #8a8a8e;
+      --text-tertiary: #5a5a5e;
+      --accent: #6366f1;
+      --accent-dim: rgba(99, 102, 241, 0.12);
+      --teal: #2dd4bf;
+      --teal-dim: rgba(45, 212, 191, 0.12);
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+      --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+      --max-width: 680px;
+      --transition: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    a:hover {
+      color: var(--teal);
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10, 10, 11, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    nav .logo {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    nav .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    nav .nav-links a {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 400;
+      transition: color var(--transition);
+    }
+
+    nav .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 140px 0 80px;
+    }
+
+    .hero .location {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+      margin-bottom: 20px;
+    }
+
+    .hero .location .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--teal);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .hero .tagline {
+      font-size: clamp(18px, 3vw, 22px);
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+
+    .hero .sub-headline {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    .hero .links {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .hero .links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all var(--transition);
+    }
+
+    .hero .links .primary-btn {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .hero .links .primary-btn:hover {
+      background: #818cf8;
+      color: #fff;
+    }
+
+    .hero .links .secondary-btn {
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .hero .links .secondary-btn:hover {
+      border-color: var(--text-tertiary);
+      color: var(--text-primary);
+    }
+
+    /* ── Sections ── */
+    section {
+      padding: 64px 0;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      margin-bottom: 24px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── About ── */
+    .about p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .about .highlight {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* ── Experience ── */
+    .timeline-item {
+      position: relative;
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      transition: border-color var(--transition);
+    }
+
+    .timeline-item:hover {
+      border-color: var(--text-tertiary);
+    }
+
+    .timeline-item .period {
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: var(--text-tertiary);
+      margin-bottom: 8px;
+    }
+
+    .timeline-item .current-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--teal);
+      background: var(--teal-dim);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: 8px;
+    }
+
+    .timeline-item h3 {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+
+    .timeline-item .company {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .timeline-item .focus {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      line-height: 1.6;
+    }
+
+    /* ── Patents ── */
+    .patent-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color var(--transition);
+    }
+
+    .patent-card:hover {
+      border-color: var(--text-tertiary);
+    }
+
+    .patent-card .icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-dim);
+      color: var(--accent);
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    .patent-card .info h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .patent-card .info p {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+    }
+
+    /* ── Tech Arsenal ── */
+    .arsenal-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .arsenal-category {
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color var(--transition);
+    }
+
+    .arsenal-category:hover {
+      border-color: var(--text-tertiary);
+    }
+
+    .arsenal-category h3 {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .arsenal-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .arsenal-tags span {
+      display: inline-block;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-family: var(--font-mono);
+      color: var(--text-secondary);
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all var(--transition);
+    }
+
+    .arsenal-tags span:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    footer .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    footer .copyright {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+    }
+
+    footer .social-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    footer .social-links a {
+      color: var(--text-tertiary);
+      font-size: 18px;
+      transition: color var(--transition);
+    }
+
+    footer .social-links a:hover {
+      color: var(--text-primary);
+    }
+
+    /* ── Responsive ── */
+    @media (min-width: 640px) {
+      .arsenal-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav .nav-links {
+        gap: 16px;
+      }
+
+      nav .nav-links a {
+        font-size: 13px;
+      }
+
+      .hero .links {
+        flex-direction: column;
+      }
+
+      .hero .links a {
+        justify-content: center;
+      }
+
+      footer .container {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="container">
+      <span class="logo">nc</span>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#arsenal">Stack</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="location">
+        <span class="dot"></span>
+        Rochester, MN
+      </div>
+      <h1>Nicholas Campion</h1>
+      <p class="tagline">CTO &amp; AI Transformation Architect</p>
+      <p class="sub-headline">Bridging the gap between executive vision and hands-on engineering. Leading the shift from conventional programming to AI-augmented development.</p>
+      <div class="links">
+        <a href="https://www.linkedin.com/in/campnic/" class="primary-btn" target="_blank" rel="noopener">
+          <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+        <a href="https://github.com/campnic" class="secondary-btn" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container"><div class="divider"></div></div>
+
+  <!-- About -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="section-label">The Thesis</div>
+      <p>
+        I'm a <span class="highlight">sitting CTO who actually builds</span>. While most technology executives manage from a distance, I architect systems hands-on&mdash;using Claude Code, OpenAI Codex, and Python daily to ship production infrastructure. My focus is helping organizations transition from "writing code" to <span class="highlight">architecting intelligence</span>: building the workflows, data layers, and human-AI feedback loops that turn generative AI from a novelty into a compounding operational advantage.
+      </p>
+    </div>
+  </section>
+
+  <div class="container"><div class="divider"></div></div>
+
+  <!-- Experience -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-label">Experience</div>
+
+      <div class="timeline-item">
+        <div class="period">2025 &ndash; Present <span class="current-badge">Current</span></div>
+        <h3>Chief Technology Officer</h3>
+        <div class="company">XBE &middot; Remote</div>
+        <p class="focus">Driving AI initiatives, development team performance, and technology strategy for a logistics platform focused on heavy materials and construction.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="period">Sep 2022 &ndash; Jul 2025</div>
+        <h3>Chief Technology Officer</h3>
+        <div class="company">Digital Fleet &middot; Rochester, MN</div>
+        <p class="focus">Led technology strategy and built teams focused on research, development, and delivery of software mission-critical to the construction industry. Acquired by Command Alkon in 2025.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="period">Mar 2020 &ndash; Sep 2022</div>
+        <h3>Product Owner for Watson AIOps</h3>
+        <div class="company">IBM &middot; Rochester, MN</div>
+        <p class="focus">Worked at the confluence of software architecture, product, and offering management to deliver DevOps automation powered by AI/ML. Helped lead the team powering IBM's AI automation platform across Kubernetes, OpenShift, and machine learning model training.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="period">May 2016 &ndash; Dec 2019</div>
+        <h3>Vice President of Product</h3>
+        <div class="company">Naviga &middot; Rochester, MN</div>
+        <p class="focus">Managed the strategic synchronization and delivery of products across the product ecosystem, with more than 50 products world-wide being actively developed on four continents.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="period">Oct 2010 &ndash; Jun 2016</div>
+        <h3>Principal Engineer &amp; Director of Mobile</h3>
+        <div class="company">DoApp, Inc. &middot; Rochester, MN</div>
+        <p class="focus">Developed and drove the mobile product pipeline for iOS and Android, serving more than 12 million users every month. Built an industry-leading mobile news syndication platform delivering content and digital advertising at scale.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="period">Dec 2005 &ndash; Oct 2010</div>
+        <h3>Cloud Computing Development Lead &amp; Software Engineer</h3>
+        <div class="company">IBM &middot; Rochester, MN</div>
+        <p class="focus">Technical leadership on team formulating and developing POWER-processor based cloud infrastructure offerings. Architected and implemented management systems for virtualization of software in IBM POWER environments before moving into general virtual machine management. Earlier, designed and developed collaboration software and services for the IBM iSeries.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="period">Jan 2015 &ndash; Jan 2023</div>
+        <h3>City Council Member, Ward 3</h3>
+        <div class="company">City of Rochester, MN</div>
+        <p class="focus">Served on the city council with a focus on zoning policy, financial and tax theory, and the future of technology in city management and services.</p>
+      </div>
+
+      <!-- Patents -->
+      <div style="margin-top: 32px;">
+        <div class="patent-card">
+          <div class="icon">
+            <i class="fas fa-file-shield"></i>
+          </div>
+          <div class="info">
+            <h3>Patent Inventor</h3>
+            <p>US-8706869-B2 &middot; Multiple patents in enterprise software systems</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container"><div class="divider"></div></div>
+
+  <!-- Tech Arsenal -->
+  <section id="arsenal">
+    <div class="container">
+      <div class="section-label">Technical Arsenal</div>
+      <div class="arsenal-grid">
+        <div class="arsenal-category">
+          <h3>Languages &amp; Tools</h3>
+          <div class="arsenal-tags">
+            <span>Python</span>
+            <span>Java</span>
+            <span>Kotlin</span>
+            <span>Swift</span>
+            <span>Claude Code</span>
+            <span>Codex</span>
+            <span>OpenAI API</span>
+            <span>MCP</span>
+            <span>n8n</span>
+            <span>AWS SageMaker</span>
+            <span>Postgres</span>
+          </div>
+        </div>
+        <div class="arsenal-category">
+          <h3>Architecture</h3>
+          <div class="arsenal-tags">
+            <span>AWS</span>
+            <span>Apache Iceberg</span>
+            <span>OpenTelemetry</span>
+            <span>Event-Driven</span>
+            <span>Machine Learning</span>
+            <span>LLM Applications</span>
+          </div>
+        </div>
+        <div class="arsenal-category" style="grid-column: 1 / -1;">
+          <h3>Leadership</h3>
+          <div class="arsenal-tags">
+            <span>DevOps Transformation</span>
+            <span>Engineering Culture</span>
+            <span>AI-Augmented SDLC</span>
+            <span>Dev Finance</span>
+            <span>Contract Management</span>
+            <span>Cloud Cost Strategy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <span class="copyright">&copy; 2026 Nicholas Campion</span>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/campnic/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/campnic" target="_blank" rel="noopener" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
