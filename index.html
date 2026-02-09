@@ -6,6 +6,9 @@
   <title>Nicholas Campion — CTO & AI Transformation Architect</title>
   <meta name="description" content="Nicholas Campion is a CTO and AI Transformation Architect bridging executive vision and hands-on engineering.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>N</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <style>
     *,
@@ -17,21 +20,24 @@
     }
 
     :root {
-      --bg-primary: #0a0a0b;
-      --bg-secondary: #111113;
-      --bg-card: #16161a;
-      --border: #222228;
-      --text-primary: #ededef;
-      --text-secondary: #8a8a8e;
-      --text-tertiary: #5a5a5e;
-      --accent: #6366f1;
-      --accent-dim: rgba(99, 102, 241, 0.12);
-      --teal: #2dd4bf;
-      --teal-dim: rgba(45, 212, 191, 0.12);
-      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
-      --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
-      --max-width: 680px;
-      --transition: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --bg: #FAF6EF;
+      --bg-alt: #F1ECE3;
+      --bg-card: #FFFFFF;
+      --border: #DED9CF;
+      --border-light: #EAE6DD;
+      --text: #1C1917;
+      --text-secondary: #57534E;
+      --text-tertiary: #A8A29E;
+      --accent: #3D6B8E;
+      --accent-light: rgba(61, 107, 142, 0.08);
+      --accent-hover: #2E5A7D;
+      --amber: #C48A2E;
+      --amber-light: rgba(196, 138, 46, 0.08);
+      --serif: 'Cormorant Garamond', 'Georgia', serif;
+      --sans: 'Plus Jakarta Sans', 'Helvetica Neue', sans-serif;
+      --mono: 'IBM Plex Mono', 'Menlo', monospace;
+      --max-w: 720px;
+      --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
     }
 
     html {
@@ -41,27 +47,53 @@
     }
 
     body {
-      font-family: var(--font-sans);
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
       font-size: 16px;
+      position: relative;
+    }
+
+    /* Paper grain texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
     }
 
     a {
       color: var(--accent);
       text-decoration: none;
-      transition: color var(--transition);
+      transition: color 0.3s var(--ease);
     }
 
     a:hover {
-      color: var(--teal);
+      color: var(--amber);
     }
 
     .container {
-      max-width: var(--max-width);
+      max-width: var(--max-w);
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 28px;
+    }
+
+    /* ── Scroll Animations ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* ── Nav ── */
@@ -71,325 +103,552 @@
       left: 0;
       right: 0;
       z-index: 100;
-      background: rgba(10, 10, 11, 0.8);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(250, 246, 239, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-light);
+      transition: box-shadow 0.3s var(--ease);
+    }
+
+    nav.scrolled {
+      box-shadow: 0 1px 12px rgba(28, 25, 23, 0.06);
     }
 
     nav .container {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 56px;
+      height: 60px;
     }
 
     nav .logo {
+      font-family: var(--serif);
       font-weight: 600;
-      font-size: 15px;
-      color: var(--text-primary);
+      font-size: 22px;
+      color: var(--text);
       letter-spacing: -0.02em;
     }
 
     nav .nav-links {
       display: flex;
-      gap: 24px;
+      gap: 32px;
       list-style: none;
     }
 
     nav .nav-links a {
-      color: var(--text-secondary);
-      font-size: 14px;
-      font-weight: 400;
-      transition: color var(--transition);
+      color: var(--text-tertiary);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.3s var(--ease);
     }
 
     nav .nav-links a:hover {
-      color: var(--text-primary);
+      color: var(--text);
     }
 
     /* ── Hero ── */
     .hero {
-      padding: 140px 0 80px;
+      padding: 148px 0 88px;
     }
 
-    .hero .location {
+    .hero-top {
+      margin-bottom: 36px;
+    }
+
+    .hero .dateline {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-size: 13px;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
       color: var(--text-tertiary);
-      font-family: var(--font-mono);
-      margin-bottom: 20px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
     }
 
-    .hero .location .dot {
-      width: 6px;
-      height: 6px;
-      background: var(--teal);
+    .hero .dateline .pulse {
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
       border-radius: 50%;
-      display: inline-block;
-      animation: pulse 2s ease-in-out infinite;
+      position: relative;
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+    .hero .dateline .pulse::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1.5px solid var(--accent);
+      animation: ping 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes ping {
+      0% { transform: scale(1); opacity: 0.6; }
+      75%, 100% { transform: scale(2.2); opacity: 0; }
     }
 
     .hero h1 {
-      font-size: clamp(36px, 6vw, 48px);
-      font-weight: 700;
+      font-family: var(--serif);
+      font-size: clamp(48px, 8vw, 72px);
+      font-weight: 400;
       letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 8px;
+      line-height: 1;
+      margin-bottom: 12px;
+      color: var(--text);
     }
 
-    .hero .tagline {
-      font-size: clamp(18px, 3vw, 22px);
+    .hero .title {
+      font-family: var(--serif);
+      font-size: clamp(22px, 3.5vw, 30px);
+      font-weight: 400;
+      font-style: italic;
       color: var(--accent);
-      font-weight: 500;
       letter-spacing: -0.01em;
-      margin-bottom: 20px;
+      line-height: 1.3;
     }
 
-    .hero .sub-headline {
+    /* Hero profile row */
+    .hero-profile {
+      display: flex;
+      gap: 36px;
+      align-items: flex-start;
+    }
+
+    /* Portrait with editorial offset frame */
+    .portrait {
+      flex-shrink: 0;
+      position: relative;
+      width: 180px;
+    }
+
+    .portrait::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: -10px;
+      bottom: -10px;
+      background: linear-gradient(135deg, var(--accent), var(--amber));
+      opacity: 0.1;
+      border-radius: 8px;
+      transition: opacity 0.4s var(--ease);
+    }
+
+    .portrait:hover::before {
+      opacity: 0.16;
+    }
+
+    .portrait img {
+      position: relative;
+      z-index: 1;
+      width: 180px;
+      height: 220px;
+      object-fit: cover;
+      object-position: center 15%;
+      border-radius: 6px;
+      display: block;
+      filter: saturate(0.92) contrast(1.02);
+      transition: filter 0.4s var(--ease);
+    }
+
+    .portrait:hover img {
+      filter: saturate(1) contrast(1);
+    }
+
+    .portrait::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+      border-radius: 6px;
+      border: 1px solid rgba(28, 25, 23, 0.06);
+      pointer-events: none;
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .hero .intro {
       font-size: 17px;
       color: var(--text-secondary);
-      line-height: 1.7;
-      max-width: 560px;
+      line-height: 1.75;
     }
 
-    .hero .links {
+    .hero .actions {
       display: flex;
-      gap: 16px;
-      margin-top: 32px;
+      gap: 12px;
+      margin-top: 28px;
     }
 
-    .hero .links a {
+    .hero .actions a {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: 8px;
+      gap: 10px;
+      padding: 12px 24px;
       font-size: 14px;
       font-weight: 500;
-      transition: all var(--transition);
+      border-radius: 6px;
+      transition: all 0.3s var(--ease);
+      letter-spacing: 0.01em;
     }
 
-    .hero .links .primary-btn {
+    .hero .actions .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .hero .actions .btn-primary:hover {
       background: var(--accent);
       color: #fff;
     }
 
-    .hero .links .primary-btn:hover {
-      background: #818cf8;
-      color: #fff;
-    }
-
-    .hero .links .secondary-btn {
-      background: var(--bg-card);
+    .hero .actions .btn-ghost {
+      background: transparent;
       color: var(--text-secondary);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
     }
 
-    .hero .links .secondary-btn:hover {
-      border-color: var(--text-tertiary);
-      color: var(--text-primary);
+    .hero .actions .btn-ghost:hover {
+      border-color: var(--text);
+      color: var(--text);
     }
 
-    /* ── Sections ── */
-    section {
-      padding: 64px 0;
-    }
-
-    .section-label {
-      display: inline-flex;
+    /* ── Section Dividers ── */
+    .rule {
+      display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--accent);
-      font-family: var(--font-mono);
-      margin-bottom: 24px;
+      gap: 16px;
+      padding: 0 28px;
+      max-width: var(--max-w);
+      margin: 0 auto;
     }
 
-    .section-label::before {
+    .rule::before,
+    .rule::after {
       content: '';
-      display: inline-block;
-      width: 16px;
-      height: 1px;
-      background: var(--accent);
-    }
-
-    .divider {
+      flex: 1;
       height: 1px;
       background: var(--border);
     }
 
-    /* ── About ── */
-    .about p {
-      font-size: 17px;
-      color: var(--text-secondary);
-      line-height: 1.8;
+    .rule .ornament {
+      width: 6px;
+      height: 6px;
+      border: 1.5px solid var(--border);
+      transform: rotate(45deg);
+      flex-shrink: 0;
     }
 
-    .about .highlight {
-      color: var(--text-primary);
+    /* ── Section Headers ── */
+    .section-header {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--accent), transparent);
+      opacity: 0.2;
+    }
+
+    .section-header .num {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-tertiary);
+      letter-spacing: -0.02em;
+    }
+
+    /* ── Sections ── */
+    section {
+      padding: 72px 0;
+    }
+
+    /* ── Thesis / About ── */
+    .thesis p {
+      font-family: var(--serif);
+      font-size: clamp(22px, 3vw, 28px);
+      line-height: 1.6;
+      color: var(--text-secondary);
+      font-weight: 400;
+      position: relative;
+    }
+
+    .thesis .em {
+      color: var(--text);
       font-weight: 500;
     }
 
-    /* ── Experience ── */
-    .timeline-item {
+    .thesis .accent-em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    /* ── Timeline ── */
+    .timeline {
       position: relative;
-      padding: 24px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      margin-bottom: 16px;
-      transition: border-color var(--transition);
     }
 
-    .timeline-item:hover {
-      border-color: var(--text-tertiary);
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), var(--border) 20%, var(--border) 80%, transparent);
     }
 
-    .timeline-item .period {
+    .t-entry {
+      position: relative;
+      padding-left: 36px;
+      padding-bottom: 40px;
+    }
+
+    .t-entry:last-child {
+      padding-bottom: 0;
+    }
+
+    .t-entry::before {
+      content: '';
+      position: absolute;
+      left: -4px;
+      top: 8px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      transition: all 0.3s var(--ease);
+      z-index: 1;
+    }
+
+    .t-entry:first-child::before {
+      border-color: var(--accent);
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-light);
+    }
+
+    .t-entry:hover::before {
+      border-color: var(--accent);
+    }
+
+    .t-entry .t-period {
+      font-family: var(--mono);
       font-size: 12px;
-      font-family: var(--font-mono);
+      color: var(--text-tertiary);
+      letter-spacing: 0.02em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .t-entry .badge-now {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+
+    .t-entry h3 {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: 3px;
+      line-height: 1.25;
+      color: var(--text);
+    }
+
+    .t-entry .t-company {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .t-entry .t-company .t-loc {
+      color: var(--text-tertiary);
+      font-weight: 400;
+    }
+
+    .t-entry .t-desc {
+      font-size: 15px;
+      color: var(--text-tertiary);
+      line-height: 1.7;
+      max-width: 600px;
+    }
+
+    /* ── Civic Service (Special Treatment) ── */
+    .civic-card {
+      margin-top: 12px;
+      padding: 20px 24px;
+      background: var(--bg-alt);
+      border-radius: 8px;
+      border-left: 3px solid var(--amber);
+      position: relative;
+    }
+
+    .civic-card .civic-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--amber);
+      margin-bottom: 6px;
+    }
+
+    .civic-card h3 {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .civic-card .civic-meta {
+      font-family: var(--mono);
+      font-size: 12px;
       color: var(--text-tertiary);
       margin-bottom: 8px;
     }
 
-    .timeline-item .current-badge {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--teal);
-      background: var(--teal-dim);
-      padding: 2px 8px;
-      border-radius: 4px;
-      margin-left: 8px;
-    }
-
-    .timeline-item h3 {
-      font-size: 17px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-bottom: 4px;
-    }
-
-    .timeline-item .company {
-      font-size: 15px;
-      color: var(--text-secondary);
-      margin-bottom: 12px;
-    }
-
-    .timeline-item .focus {
+    .civic-card p {
       font-size: 14px;
       color: var(--text-tertiary);
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
-    /* ── Patents ── */
-    .patent-card {
+    /* ── Patent ── */
+    .patent {
       display: flex;
-      align-items: flex-start;
-      gap: 16px;
+      align-items: center;
+      gap: 18px;
       padding: 20px 24px;
       background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      transition: border-color var(--transition);
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      margin-top: 40px;
+      transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
     }
 
-    .patent-card:hover {
-      border-color: var(--text-tertiary);
+    .patent:hover {
+      border-color: var(--border);
+      box-shadow: 0 2px 12px rgba(28, 25, 23, 0.04);
     }
 
-    .patent-card .icon {
+    .patent .patent-icon {
       flex-shrink: 0;
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--accent-dim);
+      background: var(--accent-light);
       color: var(--accent);
-      border-radius: 10px;
-      font-size: 16px;
+      border-radius: 8px;
+      font-size: 18px;
     }
 
-    .patent-card .info h3 {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 4px;
+    .patent h3 {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 500;
+      margin-bottom: 2px;
     }
 
-    .patent-card .info p {
-      font-size: 13px;
+    .patent .patent-id {
+      font-family: var(--mono);
+      font-size: 12px;
       color: var(--text-tertiary);
-      font-family: var(--font-mono);
     }
 
-    /* ── Tech Arsenal ── */
-    .arsenal-grid {
+    /* ── Tech Stack ── */
+    .stack-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 20px;
     }
 
-    .arsenal-category {
-      padding: 24px;
+    .stack-group {
+      padding: 28px;
       background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      transition: border-color var(--transition);
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
     }
 
-    .arsenal-category:hover {
-      border-color: var(--text-tertiary);
+    .stack-group:hover {
+      border-color: var(--border);
+      box-shadow: 0 2px 12px rgba(28, 25, 23, 0.04);
     }
 
-    .arsenal-category h3 {
-      font-size: 13px;
-      font-weight: 600;
+    .stack-group h3 {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-secondary);
+      letter-spacing: 0.1em;
+      color: var(--text-tertiary);
       margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-light);
     }
 
-    .arsenal-tags {
+    .tags {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
     }
 
-    .arsenal-tags span {
+    .tags span {
       display: inline-block;
       padding: 6px 14px;
-      font-size: 13px;
-      font-family: var(--font-mono);
+      font-family: var(--mono);
+      font-size: 12.5px;
       color: var(--text-secondary);
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      transition: all var(--transition);
+      background: var(--bg);
+      border: 1px solid var(--border-light);
+      border-radius: 4px;
+      transition: all 0.3s var(--ease);
+      cursor: default;
     }
 
-    .arsenal-tags span:hover {
+    .tags span:hover {
       border-color: var(--accent);
-      color: var(--text-primary);
+      color: var(--accent);
+      background: var(--accent-light);
     }
 
     /* ── Footer ── */
     footer {
-      padding: 48px 0;
+      padding: 56px 0 48px;
       border-top: 1px solid var(--border);
     }
 
@@ -399,54 +658,106 @@
       justify-content: space-between;
     }
 
-    footer .copyright {
-      font-size: 13px;
+    footer .mark {
+      font-family: var(--serif);
+      font-size: 14px;
       color: var(--text-tertiary);
-      font-family: var(--font-mono);
     }
 
-    footer .social-links {
+    footer .social {
       display: flex;
-      gap: 16px;
+      gap: 20px;
     }
 
-    footer .social-links a {
+    footer .social a {
       color: var(--text-tertiary);
-      font-size: 18px;
-      transition: color var(--transition);
+      font-size: 17px;
+      transition: all 0.3s var(--ease);
     }
 
-    footer .social-links a:hover {
-      color: var(--text-primary);
+    footer .social a:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
     }
 
     /* ── Responsive ── */
     @media (min-width: 640px) {
-      .arsenal-grid {
+      .stack-grid {
         grid-template-columns: 1fr 1fr;
       }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 600px) {
+      .hero {
+        padding: 130px 0 64px;
+      }
+
+      .hero h1 {
+        font-size: 40px;
+      }
+
+      .hero .title {
+        font-size: 20px;
+      }
+
+      .hero-profile {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .portrait {
+        width: 150px;
+      }
+
+      .portrait img {
+        width: 150px;
+        height: 185px;
+      }
+
+      .portrait::before {
+        top: 8px;
+        left: 8px;
+        right: -8px;
+        bottom: -8px;
+      }
+
+      .hero .intro {
+        text-align: left;
+      }
+
+      .hero .actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero .actions a {
+        justify-content: center;
+      }
+
       nav .nav-links {
-        gap: 16px;
+        gap: 20px;
       }
 
       nav .nav-links a {
-        font-size: 13px;
+        font-size: 12px;
       }
 
-      .hero .links {
-        flex-direction: column;
+      .thesis p {
+        font-size: 20px;
       }
 
-      .hero .links a {
-        justify-content: center;
+      .t-entry h3 {
+        font-size: 19px;
+      }
+
+      section {
+        padding: 56px 0;
       }
 
       footer .container {
         flex-direction: column;
-        gap: 16px;
+        gap: 20px;
         text-align: center;
       }
     }
@@ -455,13 +766,13 @@
 <body>
 
   <!-- Nav -->
-  <nav>
+  <nav id="nav">
     <div class="container">
-      <span class="logo">nc</span>
+      <span class="logo">NC</span>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#experience">Experience</a></li>
-        <li><a href="#arsenal">Stack</a></li>
+        <li><a href="#stack">Stack</a></li>
       </ul>
     </div>
   </nav>
@@ -469,117 +780,133 @@
   <!-- Hero -->
   <section class="hero">
     <div class="container">
-      <div class="location">
-        <span class="dot"></span>
-        Rochester, MN
-      </div>
-      <h1>Nicholas Campion</h1>
-      <p class="tagline">CTO &amp; AI Transformation Architect</p>
-      <p class="sub-headline">Bridging the gap between executive vision and hands-on engineering. Leading the shift from conventional programming to AI-augmented development.</p>
-      <div class="links">
-        <a href="https://www.linkedin.com/in/campnic/" class="primary-btn" target="_blank" rel="noopener">
-          <i class="fab fa-linkedin"></i> LinkedIn
-        </a>
-        <a href="https://github.com/campnic" class="secondary-btn" target="_blank" rel="noopener">
-          <i class="fab fa-github"></i> GitHub
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <div class="container"><div class="divider"></div></div>
-
-  <!-- About -->
-  <section id="about" class="about">
-    <div class="container">
-      <div class="section-label">The Thesis</div>
-      <p>
-        I'm a <span class="highlight">sitting CTO who actually builds</span>. While most technology executives manage from a distance, I architect systems hands-on&mdash;using Claude Code, OpenAI Codex, and Python daily to ship production infrastructure. My focus is helping organizations transition from "writing code" to <span class="highlight">architecting intelligence</span>: building the workflows, data layers, and human-AI feedback loops that turn generative AI from a novelty into a compounding operational advantage.
-      </p>
-    </div>
-  </section>
-
-  <div class="container"><div class="divider"></div></div>
-
-  <!-- Experience -->
-  <section id="experience">
-    <div class="container">
-      <div class="section-label">Experience</div>
-
-      <div class="timeline-item">
-        <div class="period">2025 &ndash; Present <span class="current-badge">Current</span></div>
-        <h3>Chief Technology Officer</h3>
-        <div class="company">XBE &middot; Remote</div>
-        <p class="focus">Driving AI initiatives, development team performance, and technology strategy for a logistics platform focused on heavy materials and construction.</p>
+      <div class="hero-top">
+        <div class="dateline reveal">
+          <span class="pulse"></span>
+          Rochester, MN
+        </div>
+        <h1 class="reveal">Nicholas Campion</h1>
+        <p class="title reveal">CTO &amp; AI Transformation Architect</p>
       </div>
 
-      <div class="timeline-item">
-        <div class="period">Sep 2022 &ndash; Jul 2025</div>
-        <h3>Chief Technology Officer</h3>
-        <div class="company">Digital Fleet &middot; Rochester, MN</div>
-        <p class="focus">Led technology strategy and built teams focused on research, development, and delivery of software mission-critical to the construction industry. Acquired by Command Alkon in 2025.</p>
-      </div>
-
-      <div class="timeline-item">
-        <div class="period">Mar 2020 &ndash; Sep 2022</div>
-        <h3>Product Owner for Watson AIOps</h3>
-        <div class="company">IBM &middot; Rochester, MN</div>
-        <p class="focus">Worked at the confluence of software architecture, product, and offering management to deliver DevOps automation powered by AI/ML. Helped lead the team powering IBM's AI automation platform across Kubernetes, OpenShift, and machine learning model training.</p>
-      </div>
-
-      <div class="timeline-item">
-        <div class="period">May 2016 &ndash; Dec 2019</div>
-        <h3>Vice President of Product</h3>
-        <div class="company">Naviga &middot; Rochester, MN</div>
-        <p class="focus">Managed the strategic synchronization and delivery of products across the product ecosystem, with more than 50 products world-wide being actively developed on four continents.</p>
-      </div>
-
-      <div class="timeline-item">
-        <div class="period">Oct 2010 &ndash; Jun 2016</div>
-        <h3>Principal Engineer &amp; Director of Mobile</h3>
-        <div class="company">DoApp, Inc. &middot; Rochester, MN</div>
-        <p class="focus">Developed and drove the mobile product pipeline for iOS and Android, serving more than 12 million users every month. Built an industry-leading mobile news syndication platform delivering content and digital advertising at scale.</p>
-      </div>
-
-      <div class="timeline-item">
-        <div class="period">Dec 2005 &ndash; Oct 2010</div>
-        <h3>Cloud Computing Development Lead &amp; Software Engineer</h3>
-        <div class="company">IBM &middot; Rochester, MN</div>
-        <p class="focus">Technical leadership on team formulating and developing POWER-processor based cloud infrastructure offerings. Architected and implemented management systems for virtualization of software in IBM POWER environments before moving into general virtual machine management. Earlier, designed and developed collaboration software and services for the IBM iSeries.</p>
-      </div>
-
-      <div class="timeline-item">
-        <div class="period">Jan 2015 &ndash; Jan 2023</div>
-        <h3>City Council Member, Ward 3</h3>
-        <div class="company">City of Rochester, MN</div>
-        <p class="focus">Served on the city council with a focus on zoning policy, financial and tax theory, and the future of technology in city management and services.</p>
-      </div>
-
-      <!-- Patents -->
-      <div style="margin-top: 32px;">
-        <div class="patent-card">
-          <div class="icon">
-            <i class="fas fa-file-shield"></i>
-          </div>
-          <div class="info">
-            <h3>Patent Inventor</h3>
-            <p>US-8706869-B2 &middot; Multiple patents in enterprise software systems</p>
+      <div class="hero-profile reveal">
+        <div class="portrait">
+          <img src="headshot.jpg" alt="Nicholas Campion" loading="eager">
+        </div>
+        <div class="hero-text">
+          <p class="intro">Bridging the gap between executive vision and hands-on engineering. Leading the shift from conventional programming to AI-augmented development.</p>
+          <div class="actions">
+            <a href="https://www.linkedin.com/in/campnic/" class="btn-primary" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://github.com/campnic" class="btn-ghost" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i> GitHub
+            </a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="container"><div class="divider"></div></div>
+  <div class="rule"><span class="ornament"></span></div>
 
-  <!-- Tech Arsenal -->
-  <section id="arsenal">
+  <!-- About / Thesis -->
+  <section id="about">
     <div class="container">
-      <div class="section-label">Technical Arsenal</div>
-      <div class="arsenal-grid">
-        <div class="arsenal-category">
+      <div class="section-header reveal"><span class="num">01</span> The Thesis</div>
+      <div class="thesis reveal">
+        <p>
+          I'm a <span class="em">sitting CTO who actually builds</span>. While most technology executives manage from a distance, I architect systems hands-on&mdash;using Claude Code, OpenAI Codex, and Python daily to ship production infrastructure. My focus is helping organizations transition from &ldquo;writing code&rdquo; to <span class="accent-em">architecting intelligence</span>: building the workflows, data layers, and human-AI feedback loops that turn generative AI from a novelty into a compounding operational advantage.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"><span class="ornament"></span></div>
+
+  <!-- Experience -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header reveal"><span class="num">02</span> Experience</div>
+
+      <div class="timeline">
+        <div class="t-entry reveal">
+          <div class="t-period">
+            2025 &ndash; Present
+            <span class="badge-now">Current</span>
+          </div>
+          <h3>Chief Technology Officer</h3>
+          <div class="t-company">XBE <span class="t-loc">&middot; Remote</span></div>
+          <p class="t-desc">Driving AI initiatives, development team performance, and technology strategy for a logistics platform focused on heavy materials and construction.</p>
+        </div>
+
+        <div class="t-entry reveal">
+          <div class="t-period">Sep 2022 &ndash; Jul 2025</div>
+          <h3>Chief Technology Officer</h3>
+          <div class="t-company">Digital Fleet <span class="t-loc">&middot; Rochester, MN</span></div>
+          <p class="t-desc">Led technology strategy and built teams focused on research, development, and delivery of software mission-critical to the construction industry. Acquired by Command Alkon in 2025.</p>
+        </div>
+
+        <div class="t-entry reveal">
+          <div class="t-period">Mar 2020 &ndash; Sep 2022</div>
+          <h3>Product Owner for Watson AIOps</h3>
+          <div class="t-company">IBM <span class="t-loc">&middot; Rochester, MN</span></div>
+          <p class="t-desc">Worked at the confluence of software architecture, product, and offering management to deliver DevOps automation powered by AI/ML. Helped lead the team powering IBM's AI automation platform across Kubernetes, OpenShift, and machine learning model training.</p>
+        </div>
+
+        <div class="t-entry reveal">
+          <div class="t-period">May 2016 &ndash; Dec 2019</div>
+          <h3>Vice President of Product</h3>
+          <div class="t-company">Naviga <span class="t-loc">&middot; Rochester, MN</span></div>
+          <p class="t-desc">Managed the strategic synchronization and delivery of products across the product ecosystem, with more than 50 products world-wide being actively developed on four continents.</p>
+        </div>
+
+        <div class="t-entry reveal">
+          <div class="t-period">Oct 2010 &ndash; Jun 2016</div>
+          <h3>Principal Engineer &amp; Director of Mobile</h3>
+          <div class="t-company">DoApp, Inc. <span class="t-loc">&middot; Rochester, MN</span></div>
+          <p class="t-desc">Developed and drove the mobile product pipeline for iOS and Android, serving more than 12 million users every month. Built an industry-leading mobile news syndication platform delivering content and digital advertising at scale.</p>
+        </div>
+
+        <div class="t-entry reveal">
+          <div class="t-period">Dec 2005 &ndash; Oct 2010</div>
+          <h3>Cloud Computing Development Lead &amp; Software Engineer</h3>
+          <div class="t-company">IBM <span class="t-loc">&middot; Rochester, MN</span></div>
+          <p class="t-desc">Technical leadership on team formulating and developing POWER-processor based cloud infrastructure offerings. Architected and implemented management systems for virtualization of software in IBM POWER environments before moving into general virtual machine management.</p>
+        </div>
+      </div>
+
+      <!-- Civic Service -->
+      <div class="civic-card reveal">
+        <div class="civic-label">Civic Service</div>
+        <h3>City Council Member, Ward 3</h3>
+        <div class="civic-meta">City of Rochester, MN &middot; Jan 2015 &ndash; Jan 2023</div>
+        <p>Served on the city council with a focus on zoning policy, financial and tax theory, and the future of technology in city management and services.</p>
+      </div>
+
+      <!-- Patent -->
+      <div class="patent reveal">
+        <div class="patent-icon">
+          <i class="fas fa-file-shield"></i>
+        </div>
+        <div>
+          <h3>Patent Inventor</h3>
+          <p class="patent-id">US-8706869-B2 &middot; Multiple patents in enterprise software systems</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"><span class="ornament"></span></div>
+
+  <!-- Tech Stack -->
+  <section id="stack">
+    <div class="container">
+      <div class="section-header reveal"><span class="num">03</span> Technical Arsenal</div>
+      <div class="stack-grid">
+        <div class="stack-group reveal">
           <h3>Languages &amp; Tools</h3>
-          <div class="arsenal-tags">
+          <div class="tags">
             <span>Python</span>
             <span>Java</span>
             <span>Kotlin</span>
@@ -593,9 +920,9 @@
             <span>Postgres</span>
           </div>
         </div>
-        <div class="arsenal-category">
+        <div class="stack-group reveal">
           <h3>Architecture</h3>
-          <div class="arsenal-tags">
+          <div class="tags">
             <span>AWS</span>
             <span>Apache Iceberg</span>
             <span>OpenTelemetry</span>
@@ -604,9 +931,9 @@
             <span>LLM Applications</span>
           </div>
         </div>
-        <div class="arsenal-category" style="grid-column: 1 / -1;">
+        <div class="stack-group reveal" style="grid-column: 1 / -1;">
           <h3>Leadership</h3>
-          <div class="arsenal-tags">
+          <div class="tags">
             <span>DevOps Transformation</span>
             <span>Engineering Culture</span>
             <span>AI-Augmented SDLC</span>
@@ -622,8 +949,8 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <span class="copyright">&copy; 2026 Nicholas Campion</span>
-      <div class="social-links">
+      <span class="mark">&copy; 2026 Nicholas Campion</span>
+      <div class="social">
         <a href="https://www.linkedin.com/in/campnic/" target="_blank" rel="noopener" aria-label="LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
@@ -633,6 +960,36 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Nav shadow on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // Scroll-triggered reveals
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const siblings = entry.target.parentElement.querySelectorAll('.reveal');
+          let idx = 0;
+          siblings.forEach((s, j) => {
+            if (s === entry.target) idx = j;
+          });
+          entry.target.style.transitionDelay = `${idx * 80}ms`;
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    reveals.forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
